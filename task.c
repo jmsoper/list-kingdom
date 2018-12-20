@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <string.h>
 
 int main(void){
   //just setting up vars
-  int N;
+  int i=0;
+  char command[100];
   FILE *ofile;
-  int selection = 1;
 
   //check if the file exists - we append if existing, create it not.
   char *filename="task-data.txt";
@@ -13,14 +14,15 @@ int main(void){
 
   //start the program loop
   do {
-    printf("Please enter a number. Enter -1 to quit.\n");
-    scanf("%d", &N);
-    if(N != -1){
-      fprintf(ofile, "%d ", N);
+    printf("Please enter a task name. Type 'exit' to quit.\n");
+    scanf("%s", command);
+    i = strcmp(command, "exit");
+    if(i!=0){
+      fprintf(ofile, "%s ", command);
     } else {
       printf("Exiting program.\n");
     }
-  } while (N != -1);
+  } while (i!=0);
 
   fclose(ofile);
   return 0;
