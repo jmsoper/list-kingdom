@@ -12,14 +12,19 @@ int main(int argc, char **argv){
 
   //check if the file exists - we append if existing, create it not.
   char *filename="task-data.txt";
-  printf("welcome to the kingdom of lists!\n");
+  ofile = fopen(filename, "r");
+  if (ofile == NULL) { 
+    printf("welcome to the kingdom of lists!\n");
+  } else {
+    printf("welcome back to the kingdom of lists!\n");
+  }
+  fclose(ofile);
   ofile = fopen(filename, "a");
   printf("* * * * * * * * * * * * * * * * * * * *\n");
   printf("%s\n", helpmessage);
 
   //start the program loop
   do {
-    //okay so here we need to read the entire line and scan the number of words.
     strncpy(taskentry, taskform, sizeof(taskentry) - strlen(taskentry) - 1);
     scanf("%s", command); //we take in the command -- "add" | "help" | "read" | "exit" 
     if(strcmp(command,"exit")!=0){ // we check if we should exit.
