@@ -5,6 +5,8 @@ int main(int argc, char **argv){
   //just setting up vars
   char command[100];
   char taskname[100];
+  char taskform[104] = "[ ]";
+  char taskentry[104];
   FILE *ofile;
   char *helpmessage = "To add a task, enter 'add.' To see your tasks, enter 'read.' To leave the program, enter 'exit.' To see these instructions again, enter 'help.'";
 
@@ -18,6 +20,7 @@ int main(int argc, char **argv){
   //start the program loop
   do {
     //okay so here we need to read the entire line and scan the number of words.
+    strncpy(taskentry, taskform, sizeof(taskentry) - strlen(taskentry) - 1);
     scanf("%s", command); //we take in the command -- "add" | "help" | "read" | "exit" 
     if(strcmp(command,"exit")!=0){ // we check if we should exit.
       if (strcmp(command,"read")==0){
@@ -28,8 +31,8 @@ int main(int argc, char **argv){
         printf("Please enter a task name with no spaces: ");
         scanf("%s", taskname);
         //add the command
-        fprintf(ofile, "%s ", taskname);
-        printf("\nYour task %s has been successfully added. \n", taskname);
+        fprintf(ofile, "%s ", strncat(taskentry, taskname, sizeof(taskentry) - strlen(taskentry) - 1));
+        printf("\nYour task '%s' has been successfully added. \n", taskname);
       } else if (strcmp(command,"help")==0){
         printf("%s\n", helpmessage);
       } else {
