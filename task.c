@@ -1,41 +1,45 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(void){
+int main(int argc, char **argv){
   //just setting up vars
-  int taskcmp=0;
-  int commandcmp=0;
-  int exitcmp=0;
   char command[100];
   char taskname[100];
   FILE *ofile;
+  char *helpmessage = "To add a task, enter 'add.' To see your tasks, enter 'read.' To leave the program, enter 'exit.' To see these instructions again, enter 'help.'";
 
   //check if the file exists - we append if existing, create it not.
   char *filename="task-data.txt";
   printf("welcome to the kingdom of lists!\n");
   ofile = fopen(filename, "a");
+  printf("* * * * * * * * * * * * * * * * * * * *\n");
+  printf("%s\n", helpmessage);
 
   //start the program loop
   do {
-    printf("Please enter a task name. Type 'exit' to quit.\n");
-    scanf("%s %s", command, taskname);
-    exitcmp = strcmp(command, "exit");
-    if(exitcmp!=0){
-      commandcmp = strcmp(command, "read");
-      if (commandcmp==0){
+    //okay so here we need to read the entire line and scan the number of words.
+    scanf("%s", command); //we take in the command -- "add" | "help" | "read" | "exit" 
+    if(strcmp(command,"exit")!=0){ // we check if we should exit.
+      if (strcmp(command,"read")==0){
         //read out the file and print to screen.
-        printf("reading out your tasks!!");
-      }
-      commandcmp = strcmp(command, "add");
-      if (commandcmp==0){
+        printf("reading out your tasks!!\n");
+      } else if (strcmp(command,"add")==0){
+        //get the task name with no spaces
+        printf("Please enter a task name with no spaces: ");
+        scanf("%s", taskname);
         //add the command
-        // -> we have an error in this whole thing about taking in the wrong number of args
         fprintf(ofile, "%s ", taskname);
+        printf("\nYour task %s has been successfully added. \n", taskname);
+      } else if (strcmp(command,"help")==0){
+        printf("%s\n", helpmessage);
+      } else {
+        // if you type in a multi-word command that it doesn't recognize, this looks weird. Another fgets opportunity
+        printf("'%s' is not a valid command. Enter 'help' to see a list of commands.\n", command);
       }
     } else {
       printf("Exiting program.\n");
     }
-  } while (exitcmp!=0);
+  } while (strcmp(command,"exit")!=0);
 
   fclose(ofile);
   return 0;
