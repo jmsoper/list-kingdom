@@ -5,12 +5,12 @@ int main(int argc, char **argv){
   //just setting up vars
   char command[100];
   char taskname[100];
-  char taskform[104] = "[ ]";
+  char taskform[104] = "[ ] ";
   char taskentry[104];
   FILE *ofile;
   char *helpmessage = "To add a task, enter 'add.' To see your tasks, enter 'read.' To leave the program, enter 'exit.' To see these instructions again, enter 'help.'";
 
-  //check if the file exists - we append if existing, create it not.
+  //check if the file exists
   char *filename="task-data.txt";
   ofile = fopen(filename, "r");
   if (ofile == NULL) { 
@@ -19,25 +19,35 @@ int main(int argc, char **argv){
     printf("welcome back to the kingdom of lists!\n");
   }
   fclose(ofile);
-  ofile = fopen(filename, "a");
   printf("* * * * * * * * * * * * * * * * * * * *\n");
   printf("%s\n", helpmessage);
 
   //start the program loop
   do {
+    //I think this strncpy should actually be a malloc
     strncpy(taskentry, taskform, sizeof(taskentry) - strlen(taskentry) - 1);
     scanf("%s", command); //we take in the command -- "add" | "help" | "read" | "exit" 
     if(strcmp(command,"exit")!=0){ // we check if we should exit.
       if (strcmp(command,"read")==0){
+        char task[104];
         //read out the file and print to screen.
         printf("reading out your tasks!!\n");
+        //this is actually a great usecase for malloc. but we'll get back to that.
+        ofile = fopen(filename, "r"); 
+        while(fscanf(ofile, "%s", task)!=EOF){
+          printf("%s\n", task);
+        }
+        fclose(ofile);
       } else if (strcmp(command,"add")==0){
         //get the task name with no spaces
         printf("Please enter a task name with no spaces: ");
         scanf("%s", taskname);
         //add the command
-        fprintf(ofile, "%s ", strncat(taskentry, taskname, sizeof(taskentry) - strlen(taskentry) - 1));
+        ofile = fopen(filename, "a");
+        //fprintf(ofile, "%s ", strncat(taskentry, taskname, sizeof(taskentry) - strlen(taskentry) - 1)); //I think the brackets are throwing off parsing
+        fprintf(ofile, "%s ", taskname);
         printf("\nYour task '%s' has been successfully added. \n", taskname);
+        fclose(ofile);
       } else if (strcmp(command,"help")==0){
         printf("%s\n", helpmessage);
       } else {
