@@ -5,7 +5,7 @@ int main(int argc, char **argv){
   //just setting up vars
   char command[100];
   char taskname[100];
-  char taskform[104] = "[ ] ";
+  char taskform[104] = "[_]";
   char taskentry[104];
   FILE *ofile;
   char *helpmessage = "To add a task, enter 'add.' To see your tasks, enter 'read.' To leave the program, enter 'exit.' To see these instructions again, enter 'help.'";
@@ -44,8 +44,7 @@ int main(int argc, char **argv){
         scanf("%s", taskname);
         //add the command
         ofile = fopen(filename, "a");
-        //fprintf(ofile, "%s ", strncat(taskentry, taskname, sizeof(taskentry) - strlen(taskentry) - 1)); //I think the brackets are throwing off parsing
-        fprintf(ofile, "%s ", taskname);
+        fprintf(ofile, "%s ", strncat(taskentry, taskname, sizeof(taskentry) - strlen(taskentry) - 1));
         printf("\nYour task '%s' has been successfully added. \n", taskname);
         fclose(ofile);
       } else if (strcmp(command,"help")==0){
