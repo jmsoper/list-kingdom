@@ -1,4 +1,4 @@
- list-kingdom
+# list-kingdom
 A tiny command-line list maker
 
 ![Magic book from Secret of NIMH animated movie](https://media.giphy.com/media/LX9cOF1YdfLry/giphy.gif)
@@ -28,7 +28,8 @@ An example of an unfolded tree:
                |              \_ [x]task three
                |
                |\_ [ ]this is the fourth subtask
-                \_ [x]this is the last task! ```
+                \_ [x]this is the last task!
+ ```
 
 An example of a folded tree:
 ```[ ] my first task [...]```
