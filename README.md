@@ -18,17 +18,18 @@ A tiny command-line list maker
 - [ ] Categories can be folded up or opened
 
 An example of an unfolded tree:
-```[ ] my first task -
-               |\_ [ ]this is the first subtask
-               |\_ [x]this is the second subtask
-               |
-               |\_ [x]this is the third subtask
-               |              \_ [x]task one
-               |              \_ [x]task two
-               |              \_ [x]task three
-               |
-               |\_ [ ]this is the fourth subtask
-                \_ [x]this is the last task!
+```
+[ ] my first task
+                 |\_ [ ]this is the first subtask
+                 |\_ [x]this is the second subtask
+                 |
+                 |\_ [x]this is the third subtask
+                 |              \_ [x]task one
+                 |              \_ [x]task two
+                 |              \_ [x]task three
+                 |
+                 |\_ [ ]this is the fourth subtask
+                  \_ [x]this is the last task!
  ```
 
 An example of a folded tree:
