@@ -1,6 +1,8 @@
  list-kingdom
 A tiny command-line list maker
 
+![Magic book from Secret of NIMH animated movie](https://media.giphy.com/media/LX9cOF1YdfLry/giphy.gif)
+
 ### Basic functionality:
 - [x] Users can add items to a list
 - [ ] Users can remove items from a list
